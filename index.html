@@ -145,8 +145,9 @@
       color: var(--ink);
       background: color-mix(in srgb, var(--accent, #ffb000) 2%, #090400);
       border: 1px solid var(--line);
+      position: relative;
       padding: .75rem .8rem .65rem;
-      margin: .65rem 0;
+      margin: 2rem 0 .65rem;
     }
     .fighter input[type=text],
     .fighter input[type=number] {
@@ -161,7 +162,7 @@
       --ink-dim: #c47a00;
       --glow: #ffbf40;
       --line: #7a4a00;
-      background: rgba(16,8,0,.72);
+      background: #0e0700;
     }
     .fighter.amber input[type=text],
     .fighter.amber input[type=number],
@@ -294,17 +295,63 @@
       background: color-mix(in srgb, var(--accent, #ffb000) 1%, #050200);
       box-shadow: 0 0 0 1px var(--ink);
     }
-    .turn-tag {
-      display: none;
-      color: #140800;
-      background: var(--ink);
-      font-size: .72rem;
-      letter-spacing: .1em;
-      padding: .15rem .4rem;
-      margin: 0 0 .35rem;
-      width: max-content;
+    .card-tabs {
+      position: absolute;
+      top: auto;
+      bottom: 100%;
+      display: flex;
+      gap: 3px;
+      z-index: 2;
     }
-    .fighter.active .turn-tag { display: block; }
+    .card-tabs.left { left: -1px; }
+    .card-tabs.right { right: -1px; }
+    .fighter .tab {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      box-sizing: border-box;
+      height: 1.7rem;
+      padding: 0 .55rem;
+      border: 1px solid var(--line);
+      border-bottom: 0;
+      background: color-mix(in srgb, var(--accent, #ffb000) 2%, #090400);
+      color: var(--ink);
+      font: inherit;
+      font-size: .7rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      line-height: 1;
+      box-shadow: none;
+    }
+    .tab.turn {
+      display: none;
+      background: var(--ink);
+      color: #140800;
+      font-weight: 700;
+    }
+    .fighter.active .tab.turn { display: inline-flex; }
+    .fighter.active .tab { border-color: var(--ink); }
+    .tab.fold, .tab.kill {
+      width: 1.7rem;
+      padding: 0;
+      cursor: pointer;
+    }
+    .fighter.amber .tab {
+      background: #0e0700;
+    }
+    .fighter.amber .tab.turn {
+      background: #ffb000;
+      color: #140800;
+    }
+    .fighter.collapsed .full-only { display: none !important; }
+    .fighter:not(.collapsed) .hp-nudge { display: none; }
+    .hp-nudge {
+      width: 1.5rem;
+      height: 1.5rem;
+      padding: 0;
+      flex: 0 0 auto;
+      letter-spacing: 0;
+    }
     .name-block {
       min-width: 0;
       flex: 0 1 auto;
@@ -600,7 +647,7 @@
 <body>
   <header>
     <h1>PONY.SYS // DUSTY COMBAT</h1>
-    <p class="sub">HP / TURN ORDER. LOAD AN EXPORT OR ADD FIGHTERS. <a href="https://projectmobius13.github.io/dusty-stamp/">DUSTY STAMP</a></p>
+    <p class="sub">HP / TURN ORDER. LOAD AN EXPORT OR ADD FIGHTERS. <a href="https://projectmobius13.github.io/dusty-combat/">DUSTY STAMP</a></p>
   </header>
   <main>
     <p class="status" id="status">WAITING FOR INPUT.</p>
