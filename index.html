@@ -442,11 +442,19 @@
       min-height: .7rem;
     }
     .hp-heart {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 1.05rem;
+      height: 1.05rem;
       color: #ff3b30;
       font-size: 1.05rem;
       line-height: 1;
       margin-right: .25rem;
+      overflow: hidden;
+      flex: 0 0 auto;
     }
+    .hp-heart.broke { font-size: .78rem; }
     .hp-nums {
       color: var(--accent, var(--ink));
       letter-spacing: .06em;
